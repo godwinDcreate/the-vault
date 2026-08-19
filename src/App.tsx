@@ -29,6 +29,7 @@ import { PennyItemHUD } from './components/PennyItemHUD';
 import { TripOptimizerModal } from './components/TripOptimizerModal';
 import { ListingModal } from './components/ListingModal';
 import { FlipTracker } from './components/FlipTracker';
+import { UserManual } from './components/UserManual';
 
 const CATEGORIES: { label: string; value: ArbitrageCategory | 'all' }[] = [
   { label: 'All 50%+ Clearance Deals', value: 'all' },
@@ -42,7 +43,7 @@ const CATEGORIES: { label: string; value: ArbitrageCategory | 'all' }[] = [
 ];
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'deals' | 'scanner' | 'stores' | 'penny_hud' | 'route_planner' | 'portfolio'>('deals');
+  const [activeTab, setActiveTab] = useState<'deals' | 'scanner' | 'stores' | 'penny_hud' | 'route_planner' | 'portfolio' | 'manual'>('deals');
   const [showcaseIndex, setShowcaseIndex] = useState(0);
   
   // Modals
@@ -323,6 +324,9 @@ export default function App() {
 
         {/* TAB 6: MY FLIP PORTFOLIO & TRACKER */}
         {activeTab === 'portfolio' && <FlipTracker />}
+
+        {/* TAB 7: OFFICIAL USER MANUAL & PDF EXPORT */}
+        {activeTab === 'manual' && <UserManual />}
       </main>
 
       {/* Global Modals */}

@@ -10,12 +10,13 @@ import {
   Zap,
   MapPin,
   TrendingUp,
-  PackageCheck
+  PackageCheck,
+  BookOpen
 } from 'lucide-react';
 
 interface NavbarProps {
-  activeTab: 'deals' | 'scanner' | 'stores' | 'penny_hud' | 'route_planner' | 'portfolio';
-  setActiveTab: (tab: 'deals' | 'scanner' | 'stores' | 'penny_hud' | 'route_planner' | 'portfolio') => void;
+  activeTab: 'deals' | 'scanner' | 'stores' | 'penny_hud' | 'route_planner' | 'portfolio' | 'manual';
+  setActiveTab: (tab: 'deals' | 'scanner' | 'stores' | 'penny_hud' | 'route_planner' | 'portfolio' | 'manual') => void;
   onOpenLiveScan: () => void;
   dealsCount: number;
   storesCount: number;
@@ -167,6 +168,19 @@ export const Navbar: React.FC<NavbarProps> = ({
               <PackageCheck className="w-3.5 h-3.5" />
               <span>My Flip Tracker</span>
             </button>
+
+            <button
+              id="nav-tab-manual"
+              onClick={() => setActiveTab('manual')}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                activeTab === 'manual'
+                  ? 'bg-amber-500 text-slate-950 shadow-sm'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
+              }`}
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>User Manual (PDF)</span>
+            </button>
           </nav>
 
           {/* Action Button */}
@@ -233,6 +247,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           }`}
         >
           Flip Tracker
+        </button>
+        <button
+          onClick={() => setActiveTab('manual')}
+          className={`flex-shrink-0 px-3 py-1 rounded-md text-xs font-medium ${
+            activeTab === 'manual' ? 'bg-amber-500 text-slate-950 font-bold' : 'text-slate-300 bg-slate-900'
+          }`}
+        >
+          User Manual (PDF)
         </button>
       </div>
     </header>
