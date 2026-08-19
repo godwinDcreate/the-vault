@@ -17,7 +17,8 @@ import {
   Clock,
   MapPin,
   Flame,
-  ArrowRight
+  ArrowRight,
+  ShieldCheck
 } from 'lucide-react';
 import jsPDF from 'jspdf';
 
@@ -307,20 +308,18 @@ Weekly Markdown Schedule:
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-slate-900 via-slate-900 to-slate-950 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="p-2.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold">
-              <BookOpen className="w-6 h-6" />
-            </span>
-            <div>
-              <h2 className="text-xl font-extrabold text-white">
-                Official User Manual & Field Playbook
-              </h2>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Complete operational guide for retail arbitrage, tag decoding, and 50%+ profit flips in Iowa
-              </p>
-            </div>
+      <div className="p-6 sm:p-8 rounded-3xl bg-[#0e1320] border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
+        <div className="flex items-center gap-3.5">
+          <div className="p-3 rounded-2xl bg-amber-400/10 border border-amber-400/30 text-amber-400 font-bold">
+            <BookOpen className="w-6 h-6" />
+          </div>
+          <div>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white font-display">
+              Official User Manual & Field Playbook
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
+              Complete operational guide for retail arbitrage, tag decoding, and 50%+ profit flips in Iowa
+            </p>
           </div>
         </div>
 
@@ -330,7 +329,7 @@ Weekly Markdown Schedule:
             id="btn-download-manual-pdf"
             onClick={handleDownloadPdf}
             disabled={isExporting}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold text-xs shadow-lg shadow-amber-500/20 active:scale-95 transition-all disabled:opacity-50"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-xs shadow-lg active:scale-95 transition-all disabled:opacity-50 font-display"
           >
             <Download className="w-4 h-4 text-slate-950" />
             <span>{isExporting ? 'Generating PDF...' : 'Export as PDF Document'}</span>
@@ -338,66 +337,66 @@ Weekly Markdown Schedule:
 
           <button
             onClick={handlePrint}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs border border-slate-700 transition-all"
+            className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[#07090e] hover:bg-slate-800 text-slate-200 font-bold text-xs border border-slate-800 transition-all"
           >
             <Printer className="w-4 h-4 text-slate-300" />
-            <span>Print Manual</span>
+            <span>Print</span>
           </button>
         </div>
       </div>
 
       {/* Interactive Manual Document Viewer */}
-      <div className="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden shadow-xl">
+      <div className="rounded-3xl bg-[#0e1320] border border-slate-800 overflow-hidden shadow-2xl">
         {/* Table of Contents Header */}
-        <div className="px-6 py-4 bg-slate-950 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+        <div className="px-6 py-4 bg-[#07090e] border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">
             Table of Contents (Jump to Section):
           </span>
           <div className="flex flex-wrap gap-1.5 text-xs">
             <button
               onClick={() => setActiveSection('all')}
-              className={`px-2.5 py-1 rounded-md transition-all ${
-                activeSection === 'all' ? 'bg-amber-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-slate-900'
+              className={`px-3 py-1.5 rounded-xl transition-all ${
+                activeSection === 'all' ? 'bg-amber-400 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-[#0e1320] border border-slate-800'
               }`}
             >
               Full Manual
             </button>
             <button
               onClick={() => setActiveSection('routine')}
-              className={`px-2.5 py-1 rounded-md transition-all ${
-                activeSection === 'routine' ? 'bg-amber-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-slate-900'
+              className={`px-3 py-1.5 rounded-xl transition-all ${
+                activeSection === 'routine' ? 'bg-amber-400 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-[#0e1320] border border-slate-800'
               }`}
             >
               3-Step Routine
             </button>
             <button
               onClick={() => setActiveSection('tags')}
-              className={`px-2.5 py-1 rounded-md transition-all ${
-                activeSection === 'tags' ? 'bg-amber-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-slate-900'
+              className={`px-3 py-1.5 rounded-xl transition-all ${
+                activeSection === 'tags' ? 'bg-amber-400 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-[#0e1320] border border-slate-800'
               }`}
             >
               Tag Decoders
             </button>
             <button
               onClick={() => setActiveSection('ghost')}
-              className={`px-2.5 py-1 rounded-md transition-all ${
-                activeSection === 'ghost' ? 'bg-amber-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-slate-900'
+              className={`px-3 py-1.5 rounded-xl transition-all ${
+                activeSection === 'ghost' ? 'bg-amber-400 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-[#0e1320] border border-slate-800'
               }`}
             >
               Ghost Stock Audit
             </button>
             <button
               onClick={() => setActiveSection('stores')}
-              className={`px-2.5 py-1 rounded-md transition-all ${
-                activeSection === 'stores' ? 'bg-amber-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-slate-900'
+              className={`px-3 py-1.5 rounded-xl transition-all ${
+                activeSection === 'stores' ? 'bg-amber-400 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-[#0e1320] border border-slate-800'
               }`}
             >
               102 Stores & Days
             </button>
             <button
               onClick={() => setActiveSection('playbook')}
-              className={`px-2.5 py-1 rounded-md transition-all ${
-                activeSection === 'playbook' ? 'bg-amber-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-slate-900'
+              className={`px-3 py-1.5 rounded-xl transition-all ${
+                activeSection === 'playbook' ? 'bg-amber-400 text-slate-950 font-bold' : 'text-slate-400 hover:text-white bg-[#0e1320] border border-slate-800'
               }`}
             >
               Listing Playbook
@@ -411,17 +410,17 @@ Weekly Markdown Schedule:
           {(activeSection === 'all' || activeSection === 'routine') && (
             <section className="space-y-4">
               <div className="flex items-center gap-2 pb-2 border-b border-slate-800">
-                <span className="p-1 rounded-md bg-amber-500/10 text-amber-400 font-mono text-xs font-bold">01</span>
-                <h3 className="text-lg font-extrabold text-white">System Architecture & The 3-Step Daily Routine</h3>
+                <span className="p-1 rounded-md bg-amber-400/10 text-amber-400 font-mono text-xs font-bold">01</span>
+                <h3 className="text-lg font-extrabold text-white font-display">System Architecture & The 3-Step Daily Routine</h3>
               </div>
               <p className="text-slate-300 text-xs sm:text-sm">
                 The software functions as an automated intelligence radar scanning 102 verified retail stores across a 100-mile radius of Cedar Falls, IA. It continuously cross-references in-store clearance prices against historical eBay Sold comps (past 30 days), Amazon BuyBox, and local Iowa Facebook Marketplace medians to identify items with verified 50%+ net cash profit margins.
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-                  <div className="flex items-center gap-2 font-bold text-amber-400 text-xs">
-                    <span className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-300">1</span>
+                <div className="p-5 rounded-2xl bg-[#07090e] border border-slate-800 space-y-2.5">
+                  <div className="flex items-center gap-2 font-bold text-amber-400 text-xs font-display">
+                    <span className="w-6 h-6 rounded-full bg-amber-400/20 flex items-center justify-center text-amber-300">1</span>
                     <span>Browse Radar / Scan SKU</span>
                   </div>
                   <p className="text-xs text-slate-400">
@@ -429,9 +428,9 @@ Weekly Markdown Schedule:
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-                  <div className="flex items-center gap-2 font-bold text-amber-400 text-xs">
-                    <span className="w-6 h-6 rounded-full bg-amber-500/20 flex items-center justify-center text-amber-300">2</span>
+                <div className="p-5 rounded-2xl bg-[#07090e] border border-slate-800 space-y-2.5">
+                  <div className="flex items-center gap-2 font-bold text-amber-400 text-xs font-display">
+                    <span className="w-6 h-6 rounded-full bg-amber-400/20 flex items-center justify-center text-amber-300">2</span>
                     <span>Physically Sourced</span>
                   </div>
                   <p className="text-xs text-slate-400">
@@ -439,8 +438,8 @@ Weekly Markdown Schedule:
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-                  <div className="flex items-center gap-2 font-bold text-emerald-400 text-xs">
+                <div className="p-5 rounded-2xl bg-[#07090e] border border-slate-800 space-y-2.5">
+                  <div className="flex items-center gap-2 font-bold text-emerald-400 text-xs font-display">
                     <span className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-emerald-300">3</span>
                     <span>1-Click List & Cash Out</span>
                   </div>
@@ -456,59 +455,59 @@ Weekly Markdown Schedule:
           {(activeSection === 'all' || activeSection === 'tags') && (
             <section className="space-y-4">
               <div className="flex items-center gap-2 pb-2 border-b border-slate-800">
-                <span className="p-1 rounded-md bg-amber-500/10 text-amber-400 font-mono text-xs font-bold">02</span>
-                <h3 className="text-lg font-extrabold text-white">Retail Price Ending & Tag Decryption Matrix</h3>
+                <span className="p-1 rounded-md bg-amber-400/10 text-amber-400 font-mono text-xs font-bold">02</span>
+                <h3 className="text-lg font-extrabold text-white font-display">Retail Price Ending & Tag Decryption Matrix</h3>
               </div>
               <p className="text-slate-300 text-xs sm:text-sm">
                 Retail store managers and corporate computer systems encode markdown cycles into the last two digits of the price tag:
               </p>
 
-              <div className="overflow-x-auto rounded-xl border border-slate-800">
+              <div className="overflow-x-auto rounded-2xl border border-slate-800">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-950 text-slate-400 uppercase font-bold border-b border-slate-800">
+                  <thead className="bg-[#07090e] text-slate-400 uppercase font-bold border-b border-slate-800 font-mono">
                     <tr>
-                      <th className="p-3">Retailer</th>
-                      <th className="p-3">Price Ending / Tag</th>
-                      <th className="p-3">Lifecycle Meaning</th>
-                      <th className="p-3">Flipping Strategy</th>
+                      <th className="p-3.5">Retailer</th>
+                      <th className="p-3.5">Price Ending / Tag</th>
+                      <th className="p-3.5">Lifecycle Meaning</th>
+                      <th className="p-3.5">Flipping Strategy</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/80 bg-slate-900">
+                  <tbody className="divide-y divide-slate-800/80 bg-[#0e1320]">
                     <tr>
-                      <td className="p-3 font-bold text-white">The Home Depot</td>
-                      <td className="p-3 font-mono text-amber-300 font-bold">.06 Ending (Yellow)</td>
-                      <td className="p-3 text-slate-300">First clearance markdown; sits 6 weeks</td>
-                      <td className="p-3 text-slate-400">Monitor for next drop</td>
+                      <td className="p-3.5 font-bold text-white">The Home Depot</td>
+                      <td className="p-3.5 font-mono text-amber-300 font-bold">.06 Ending (Yellow)</td>
+                      <td className="p-3.5 text-slate-300">First clearance markdown; sits 6 weeks</td>
+                      <td className="p-3.5 text-slate-400">Monitor for next drop</td>
                     </tr>
                     <tr>
-                      <td className="p-3 font-bold text-white">The Home Depot</td>
-                      <td className="p-3 font-mono text-emerald-400 font-bold">.03 Ending (Yellow)</td>
-                      <td className="p-3 text-slate-300">Final clearance (75% off); 3 weeks until pull</td>
-                      <td className="p-3 text-emerald-400 font-bold">PRIMARY BUY TARGET</td>
+                      <td className="p-3.5 font-bold text-white">The Home Depot</td>
+                      <td className="p-3.5 font-mono text-emerald-400 font-bold">.03 Ending (Yellow)</td>
+                      <td className="p-3.5 text-slate-300">Final clearance (75% off); 3 weeks until pull</td>
+                      <td className="p-3.5 text-emerald-400 font-bold">PRIMARY BUY TARGET</td>
                     </tr>
                     <tr>
-                      <td className="p-3 font-bold text-white">Target</td>
-                      <td className="p-3 font-mono text-emerald-400 font-bold">.04 or .00 Ending</td>
-                      <td className="p-3 text-slate-300">Rock-bottom markdown (70–90% off)</td>
-                      <td className="p-3 text-emerald-400 font-bold">Instant Buy</td>
+                      <td className="p-3.5 font-bold text-white">Target</td>
+                      <td className="p-3.5 font-mono text-emerald-400 font-bold">.04 or .00 Ending</td>
+                      <td className="p-3.5 text-slate-300">Rock-bottom markdown (70–90% off)</td>
+                      <td className="p-3.5 text-emerald-400 font-bold">Instant Buy</td>
                     </tr>
                     <tr>
-                      <td className="p-3 font-bold text-white">Costco Wholesale</td>
-                      <td className="p-3 font-mono text-blue-400 font-bold">.97 Ending / Asterisk (*)</td>
-                      <td className="p-3 text-slate-300">Manager closeout; discontinued permanently</td>
-                      <td className="p-3 text-slate-300">Bulk flip opportunity</td>
+                      <td className="p-3.5 font-bold text-white">Costco Wholesale</td>
+                      <td className="p-3.5 font-mono text-blue-400 font-bold">.97 Ending / Asterisk (*)</td>
+                      <td className="p-3.5 text-slate-300">Manager closeout; discontinued permanently</td>
+                      <td className="p-3.5 text-slate-300">Bulk flip opportunity</td>
                     </tr>
                     <tr>
-                      <td className="p-3 font-bold text-white">Dollar General</td>
-                      <td className="p-3 font-mono text-purple-400 font-bold">Tuesday 1¢ POS Drop</td>
-                      <td className="p-3 text-slate-300">Automated system clearance purge</td>
-                      <td className="p-3 text-purple-300 font-bold">Tuesday morning cart search</td>
+                      <td className="p-3.5 font-bold text-white">Dollar General</td>
+                      <td className="p-3.5 font-mono text-purple-400 font-bold">Tuesday 1¢ POS Drop</td>
+                      <td className="p-3.5 text-slate-300">Automated system clearance purge</td>
+                      <td className="p-3.5 text-purple-300 font-bold">Tuesday morning cart search</td>
                     </tr>
                     <tr>
-                      <td className="p-3 font-bold text-white">Theisen's Home Auto</td>
-                      <td className="p-3 font-mono text-amber-300 font-bold">Orange Tag</td>
-                      <td className="p-3 text-slate-300">Manager store markdown in tools & farm</td>
-                      <td className="p-3 text-emerald-400 font-bold">High resale velocity in IA</td>
+                      <td className="p-3.5 font-bold text-white">Theisen's Home Auto</td>
+                      <td className="p-3.5 font-mono text-amber-300 font-bold">Orange Tag</td>
+                      <td className="p-3.5 text-slate-300">Manager store markdown in tools & farm</td>
+                      <td className="p-3.5 text-emerald-400 font-bold">High resale velocity in IA</td>
                     </tr>
                   </tbody>
                 </table>
@@ -520,13 +519,13 @@ Weekly Markdown Schedule:
           {(activeSection === 'all' || activeSection === 'ghost') && (
             <section className="space-y-4">
               <div className="flex items-center gap-2 pb-2 border-b border-slate-800">
-                <span className="p-1 rounded-md bg-amber-500/10 text-amber-400 font-mono text-xs font-bold">03</span>
-                <h3 className="text-lg font-extrabold text-white">The Ghost Stock Reality & Physical Feasibility</h3>
+                <span className="p-1 rounded-md bg-amber-400/10 text-amber-400 font-mono text-xs font-bold">03</span>
+                <h3 className="text-lg font-extrabold text-white font-display">The Ghost Stock Reality & Physical Feasibility</h3>
               </div>
               
-              <div className="p-4 rounded-xl bg-amber-950/20 border border-amber-500/30 text-xs text-amber-200/90 leading-relaxed space-y-2">
-                <div className="font-bold text-amber-400 flex items-center gap-1.5">
-                  <ShieldAlert className="w-4 h-4" />
+              <div className="p-5 rounded-2xl bg-amber-950/20 border border-amber-500/30 text-xs text-amber-200/90 leading-relaxed space-y-2.5">
+                <div className="font-bold text-amber-400 flex items-center gap-2 text-sm font-display">
+                  <ShieldAlert className="w-4 h-4 shrink-0" />
                   <span>Why you must never chase 1-cent database lists blindly:</span>
                 </div>
                 <p>
@@ -543,25 +542,25 @@ Weekly Markdown Schedule:
           {(activeSection === 'all' || activeSection === 'stores') && (
             <section className="space-y-4">
               <div className="flex items-center gap-2 pb-2 border-b border-slate-800">
-                <span className="p-1 rounded-md bg-amber-500/10 text-amber-400 font-mono text-xs font-bold">04</span>
-                <h3 className="text-lg font-extrabold text-white">102 Store Registry & Weekly Markdown Calendars</h3>
+                <span className="p-1 rounded-md bg-amber-400/10 text-amber-400 font-mono text-xs font-bold">04</span>
+                <h3 className="text-lg font-extrabold text-white font-display">102 Store Registry & Weekly Markdown Calendars</h3>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                  <span className="font-bold text-white block mb-1">Monday Markdowns:</span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+                <div className="p-4 rounded-2xl bg-[#07090e] border border-slate-800">
+                  <span className="font-bold text-white block mb-1 font-display">Monday Markdowns:</span>
                   <span className="text-slate-400">Electronics, Kids Apparel, Hardware endcaps. Home Depot price tag audits.</span>
                 </div>
-                <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                  <span className="font-bold text-amber-300 block mb-1">Tuesday (Golden Day):</span>
+                <div className="p-4 rounded-2xl bg-[#07090e] border border-slate-800">
+                  <span className="font-bold text-amber-300 block mb-1 font-display">Tuesday (Golden Day):</span>
                   <span className="text-slate-400">Dollar General 1¢ weekly drops. Target Women's apparel, Domestics & Home Goods.</span>
                 </div>
-                <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                  <span className="font-bold text-white block mb-1">Wednesday Markdowns:</span>
+                <div className="p-4 rounded-2xl bg-[#07090e] border border-slate-800">
+                  <span className="font-bold text-white block mb-1 font-display">Wednesday Markdowns:</span>
                   <span className="text-slate-400">Target Men's apparel, Health & Beauty, Garden. Menards Ray's List audits.</span>
                 </div>
-                <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-                  <span className="font-bold text-white block mb-1">Thursday / Friday:</span>
+                <div className="p-4 rounded-2xl bg-[#07090e] border border-slate-800">
+                  <span className="font-bold text-white block mb-1 font-display">Thursday / Friday:</span>
                   <span className="text-slate-400">Sporting Goods, Toys, Hardware tools, Auto accessories tag resets for the weekend.</span>
                 </div>
               </div>
@@ -572,18 +571,18 @@ Weekly Markdown Schedule:
           {(activeSection === 'all' || activeSection === 'playbook') && (
             <section className="space-y-4">
               <div className="flex items-center gap-2 pb-2 border-b border-slate-800">
-                <span className="p-1 rounded-md bg-amber-500/10 text-amber-400 font-mono text-xs font-bold">05</span>
-                <h3 className="text-lg font-extrabold text-white">Resale Listing & Safe Local Meetup Playbook</h3>
+                <span className="p-1 rounded-md bg-amber-400/10 text-amber-400 font-mono text-xs font-bold">05</span>
+                <h3 className="text-lg font-extrabold text-white font-display">Resale Listing & Safe Local Meetup Playbook</h3>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3 text-xs">
-                <div className="font-bold text-white">Safe Public Exchange Spots in Cedar Falls / Waterloo:</div>
-                <ul className="list-disc list-inside space-y-1.5 text-slate-300">
+              <div className="p-5 rounded-2xl bg-[#07090e] border border-slate-800 space-y-3.5 text-xs">
+                <div className="font-bold text-white font-display text-sm">Safe Public Exchange Spots in Cedar Falls / Waterloo:</div>
+                <ul className="list-disc list-inside space-y-2 text-slate-300 leading-relaxed">
                   <li><strong>Cedar Falls Police Department Safe Exchange Zone</strong> (Directly outside station with 24/7 surveillance).</li>
                   <li><strong>Cedar Falls Target / Hy-Vee Parking Lot</strong> (University Ave — well-lit, high daytime foot traffic).</li>
                   <li><strong>Waterloo Crossroads Mall / Home Depot Area</strong> (Convenient for Cedar Valley buyers).</li>
                 </ul>
-                <div className="p-3 rounded-lg bg-emerald-950/20 border border-emerald-500/30 text-emerald-300">
+                <div className="p-3.5 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-emerald-300">
                   💡 <strong>Pro Tip:</strong> Always specify <em>"Cash in hand upon pickup"</em>. Serious buyers will gladly meet in public for a 30-40% discount off retail MSRP.
                 </div>
               </div>
@@ -592,11 +591,11 @@ Weekly Markdown Schedule:
         </div>
 
         {/* Footer */}
-        <div className="p-5 bg-slate-950 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
+        <div className="p-6 bg-[#07090e] border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
           <span>Iowa Retail Arbitrage & Hidden Clearance Finder • Field Manual v2.4</span>
           <button
             onClick={handleDownloadPdf}
-            className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 font-bold"
+            className="flex items-center gap-1.5 text-amber-400 hover:text-amber-300 font-bold transition-colors"
           >
             <Download className="w-4 h-4" />
             <span>Click to Download Full PDF Document</span>

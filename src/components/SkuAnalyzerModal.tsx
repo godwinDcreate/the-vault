@@ -15,7 +15,8 @@ import {
   Flame,
   ArrowRight,
   RefreshCw,
-  ShoppingBag
+  ShoppingBag,
+  Zap
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { LiveSkuAnalysisRequest, LiveSkuAnalysisResult } from '../types';
@@ -117,19 +118,19 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-5">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5">
       <div 
         id="sku-analyzer-modal"
-        className="relative w-full max-w-4xl rounded-2xl bg-slate-900 border border-slate-700 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
+        className="relative w-full max-w-4xl rounded-3xl bg-[#0e1320] border border-slate-700/80 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 bg-slate-950 border-b border-slate-800">
-          <div className="flex items-center gap-2.5">
-            <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400">
+        <div className="flex items-center justify-between px-6 py-5 bg-[#07090e] border-b border-slate-800">
+          <div className="flex items-center gap-3">
+            <div className="p-2.5 rounded-2xl bg-amber-400/10 border border-amber-400/30 text-amber-400">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-extrabold text-base sm:text-lg text-white">
+              <h3 className="font-extrabold text-base sm:text-lg text-white font-display">
                 Live AI SKU Arbitrage & Resale Comp Engine
               </h3>
               <p className="text-xs text-slate-400">
@@ -140,20 +141,20 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
 
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-6">
+        <div className="flex-1 overflow-y-auto p-6 space-y-6">
           {/* Quick Preset Chips */}
           <div>
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
+            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2 font-mono">
               Popular Iowa Clearance Items to Test:
             </span>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2">
               {PRESET_QUERIES.map((preset, idx) => (
                 <button
                   key={idx}
@@ -163,20 +164,21 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
                     setPurchasePrice(preset.price.toString());
                     handleAnalyze(preset.query, preset.store, preset.price);
                   }}
-                  className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-amber-500/20 hover:border-amber-500/40 text-slate-300 hover:text-amber-300 text-xs border border-slate-700 transition-all text-left"
+                  className="px-3 py-1.5 rounded-xl bg-[#07090e] hover:bg-amber-400/20 hover:border-amber-400/40 text-slate-300 hover:text-amber-300 text-xs border border-slate-800 transition-all text-left flex items-center gap-1.5"
                 >
-                  ⚡ {preset.label}
+                  <Zap className="w-3.5 h-3.5 text-amber-400" />
+                  <span>{preset.label}</span>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Input Form */}
-          <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-3">
-            <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
+          <div className="p-5 rounded-3xl bg-[#07090e] border border-slate-800 space-y-3.5 shadow-inner">
+            <div className="grid grid-cols-1 sm:grid-cols-12 gap-3.5">
               {/* Product Query */}
               <div className="sm:col-span-8">
-                <label className="block text-xs font-bold text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
                   Product Name / Model / SKU / Barcode UPC:
                 </label>
                 <div className="relative">
@@ -186,18 +188,18 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="e.g. DeWalt 20V Brushless Drill DCD777 or UPC 885911467452"
-                    className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-amber-500"
+                    className="w-full pl-9 pr-4 py-2.5 rounded-2xl bg-[#0e1320] border border-slate-700 text-white text-sm focus:outline-none focus:border-amber-400 transition-colors"
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') handleAnalyze();
                     }}
                   />
-                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+                  <Search className="w-4 h-4 text-slate-400 absolute left-3 top-3" />
                 </div>
               </div>
 
               {/* Target Buy Price */}
               <div className="sm:col-span-4">
-                <label className="block text-xs font-bold text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
                   In-Store Clearance Price ($):
                 </label>
                 <div className="relative">
@@ -208,24 +210,24 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
                     value={purchasePrice}
                     onChange={(e) => setPurchasePrice(e.target.value)}
                     placeholder="e.g. 59.00"
-                    className="w-full pl-8 pr-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-amber-500 font-mono"
+                    className="w-full pl-8 pr-4 py-2.5 rounded-2xl bg-[#0e1320] border border-slate-700 text-white text-sm focus:outline-none focus:border-amber-400 font-mono transition-colors"
                   />
-                  <DollarSign className="w-4 h-4 text-slate-400 absolute left-2.5 top-2.5" />
+                  <DollarSign className="w-4 h-4 text-slate-400 absolute left-2.5 top-3" />
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
               {/* Store Selector */}
               <div>
-                <label className="block text-xs font-bold text-slate-300 mb-1">
+                <label className="block text-xs font-bold text-slate-300 mb-1.5">
                   Local Store (100mi Radius of Cedar Falls):
                 </label>
                 <select
                   id="select-sku-store"
                   value={selectedStore}
                   onChange={(e) => setSelectedStore(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-amber-500"
+                  className="w-full px-3.5 py-2.5 rounded-2xl bg-[#0e1320] border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-amber-400 transition-colors"
                 >
                   <option value="Theisen's Home • Farm • Auto">Theisen's Home • Farm • Auto (Waterloo / Cedar Falls)</option>
                   {IOWA_STORES.slice(0, 40).map((s) => (
@@ -242,7 +244,7 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
                   id="btn-run-sku-analysis"
                   onClick={() => handleAnalyze()}
                   disabled={isLoading}
-                  className="w-full py-2 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold text-sm shadow-md transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2"
+                  className="w-full py-2.5 px-4 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-black text-sm shadow-md transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center gap-2 font-display"
                 >
                   {isLoading ? (
                     <>
@@ -262,7 +264,7 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
 
           {/* Error Message */}
           {error && (
-            <div className="p-3.5 rounded-xl bg-red-950/40 border border-red-500/40 text-red-300 text-xs flex items-center gap-2">
+            <div className="p-4 rounded-2xl bg-red-950/40 border border-red-500/40 text-red-300 text-xs flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-red-400 flex-shrink-0" />
               <span>{error}</span>
             </div>
@@ -272,38 +274,38 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
           {result && (
             <div className="space-y-5 animate-in fade-in duration-300">
               {/* Top Verdict Banner */}
-              <div className={`p-4 rounded-xl border flex flex-wrap items-center justify-between gap-3 ${
+              <div className={`p-5 rounded-3xl border flex flex-wrap items-center justify-between gap-4 shadow-lg ${
                 result.profitMarginPercent >= 50 
-                  ? 'bg-emerald-950/40 border-emerald-500/50 text-emerald-300' 
-                  : 'bg-amber-950/40 border-amber-500/50 text-amber-300'
+                  ? 'bg-emerald-950/30 border-emerald-500/40 text-emerald-300' 
+                  : 'bg-amber-950/30 border-amber-500/40 text-amber-300'
               }`}>
-                <div className="flex items-center gap-2.5">
-                  <div className={`p-2 rounded-xl ${
-                    result.profitMarginPercent >= 50 ? 'bg-emerald-500 text-slate-950' : 'bg-amber-500 text-slate-950'
+                <div className="flex items-center gap-3">
+                  <div className={`p-3 rounded-2xl ${
+                    result.profitMarginPercent >= 50 ? 'bg-emerald-500 text-slate-950' : 'bg-amber-400 text-slate-950'
                   }`}>
                     <Flame className="w-5 h-5" />
                   </div>
                   <div>
-                    <span className="text-xs font-bold uppercase tracking-wider block">
+                    <span className="text-xs font-bold uppercase tracking-wider block font-mono">
                       Arbitrage Valuation Verdict:
                     </span>
-                    <strong className="text-lg font-black text-white">
+                    <strong className="text-xl font-black text-white font-display">
                       {result.verdict} (+{result.profitMarginPercent.toFixed(1)}% NET ROI)
                     </strong>
                   </div>
                 </div>
 
-                <div className="text-right font-mono text-sm">
+                <div className="text-right font-mono">
                   <span className="text-slate-400 block text-xs">Estimated Take-Home:</span>
-                  <strong className="text-emerald-400 text-xl font-black">+${result.netProfit.toFixed(2)}</strong>
+                  <strong className="text-emerald-400 text-2xl font-black">+${result.netProfit.toFixed(2)}</strong>
                 </div>
               </div>
 
               {/* 4-Stat Metric Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+                <div className="p-4 rounded-2xl bg-[#07090e] border border-slate-800">
                   <span className="text-[10px] uppercase font-bold text-slate-400 block">Buy Price</span>
-                  <div className="text-xl font-extrabold text-white mt-1">
+                  <div className="text-xl font-extrabold text-white mt-1 font-mono">
                     ${result.estimatedStorePrice.toFixed(2)}
                   </div>
                   <span className="text-[10px] text-slate-400 line-through">
@@ -311,9 +313,9 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+                <div className="p-4 rounded-2xl bg-[#07090e] border border-slate-800">
                   <span className="text-[10px] uppercase font-bold text-slate-400 block">eBay Sold Comp</span>
-                  <div className="text-xl font-extrabold text-amber-300 mt-1">
+                  <div className="text-xl font-extrabold text-amber-300 mt-1 font-mono">
                     ${result.ebaySoldMedian.toFixed(2)}
                   </div>
                   <span className="text-[10px] text-slate-400">
@@ -321,9 +323,9 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+                <div className="p-4 rounded-2xl bg-[#07090e] border border-slate-800">
                   <span className="text-[10px] uppercase font-bold text-slate-400 block">Iowa FB Market</span>
-                  <div className="text-xl font-extrabold text-emerald-400 mt-1">
+                  <div className="text-xl font-extrabold text-emerald-400 mt-1 font-mono">
                     ${result.fbMarketplaceIowaMedian.toFixed(2)}
                   </div>
                   <span className="text-[10px] text-emerald-400/80">
@@ -331,9 +333,9 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
                   </span>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+                <div className="p-4 rounded-2xl bg-[#07090e] border border-slate-800">
                   <span className="text-[10px] uppercase font-bold text-slate-400 block">Flip Velocity</span>
-                  <div className="text-xl font-extrabold text-blue-400 mt-1">
+                  <div className="text-xl font-extrabold text-blue-400 mt-1 font-mono">
                     {result.flipVelocityDays} Days
                   </div>
                   <span className="text-[10px] text-blue-300">
@@ -343,9 +345,9 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
               </div>
 
               {/* Ghost Stock & Feasibility Insight */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs space-y-2">
+              <div className="p-5 rounded-2xl bg-[#07090e] border border-slate-800 text-xs space-y-2.5">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 font-bold text-slate-200">
+                  <div className="flex items-center gap-2 font-bold text-slate-200 font-display">
                     {result.ghostStockRisk < 25 ? (
                       <ShieldCheck className="w-4 h-4 text-emerald-400" />
                     ) : (
@@ -362,15 +364,15 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
                 <p className="text-slate-300 leading-relaxed">
                   {result.ghostStockNotes}
                 </p>
-                <p className="text-slate-400 text-[11px] pt-1">
+                <p className="text-slate-400 text-xs pt-1">
                   {result.comparableItemsSummary}
                 </p>
               </div>
 
               {/* Ready-to-Copy Listing Pitch */}
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-3">
+              <div className="p-5 rounded-2xl bg-[#07090e] border border-slate-800 space-y-3.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-amber-400 uppercase tracking-wider font-mono">
                     Ready-to-Post Facebook Marketplace Listing:
                   </span>
                   <button
@@ -378,12 +380,12 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
                       `${result.salesPitchListingTitle}\n\nPrice: $${result.fbMarketplaceIowaMedian}\n\n${result.listingDescription}`,
                       'fb_listing'
                     )}
-                    className="flex items-center gap-1 px-2.5 py-1 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-all"
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition-all active:scale-95"
                   >
                     {copiedSection === 'fb_listing' ? (
                       <>
                         <Check className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-emerald-400">Copied!</span>
+                        <span className="text-emerald-400 font-bold">Copied!</span>
                       </>
                     ) : (
                       <>
@@ -394,7 +396,7 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
                   </button>
                 </div>
 
-                <div className="p-3 rounded-lg bg-slate-900 border border-slate-800 font-mono text-xs text-slate-200 space-y-2">
+                <div className="p-4 rounded-xl bg-[#0e1320] border border-slate-800 font-mono text-xs text-slate-200 space-y-2.5">
                   <div>
                     <span className="text-slate-400 text-[10px] uppercase font-bold block">Listing Title:</span>
                     <span className="font-semibold text-white">{result.salesPitchListingTitle}</span>
@@ -405,7 +407,7 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
                   </div>
                   <div>
                     <span className="text-slate-400 text-[10px] uppercase font-bold block">Description:</span>
-                    <p className="text-slate-300 text-[11px] whitespace-pre-wrap">{result.listingDescription}</p>
+                    <p className="text-slate-300 text-xs whitespace-pre-wrap leading-relaxed">{result.listingDescription}</p>
                   </div>
                 </div>
               </div>
@@ -414,11 +416,11 @@ export const SkuAnalyzerModal: React.FC<SkuAnalyzerModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="px-5 py-3 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
-          <span>Powered by Gemini 3.7 Flash & live Iowa market grounding</span>
+        <div className="px-6 py-4 bg-[#07090e] border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+          <span>Powered by Gemini & live Iowa market grounding</span>
           <button
             onClick={onClose}
-            className="px-4 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold"
+            className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition-colors"
           >
             Close
           </button>

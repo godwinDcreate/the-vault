@@ -9,7 +9,8 @@ import {
   Clock, 
   MapPin,
   Sparkles,
-  ShoppingBag
+  ShoppingBag,
+  ArrowUpRight
 } from 'lucide-react';
 import { DealItem } from '../types';
 
@@ -117,26 +118,24 @@ export const FlipTracker: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="p-6 rounded-2xl bg-gradient-to-r from-emerald-950/60 via-slate-900 to-slate-900 border border-emerald-500/40 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center gap-2">
-            <span className="p-2.5 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 font-bold">
-              <PackageCheck className="w-6 h-6" />
-            </span>
-            <div>
-              <h2 className="text-xl font-extrabold text-white">
-                My Iowa Retail Flip Portfolio & Cash Ledger
-              </h2>
-              <p className="text-xs text-slate-400 mt-0.5">
-                Log purchases from local Iowa stores, track active listings, and record cash in hand
-              </p>
-            </div>
+      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-emerald-950/40 via-[#0e1320] to-[#0e1320] border border-emerald-500/30 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xl">
+        <div className="flex items-center gap-3.5">
+          <div className="p-3 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 font-bold">
+            <PackageCheck className="w-6 h-6" />
+          </div>
+          <div>
+            <h2 className="text-xl sm:text-2xl font-extrabold text-white font-display">
+              My Iowa Retail Flip Portfolio & Cash Ledger
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 mt-0.5">
+              Log purchases from local Iowa stores, track active listings, and record realized cash in hand
+            </p>
           </div>
         </div>
 
         <button
           onClick={() => setShowAddForm(!showAddForm)}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs shadow-md transition-all self-start md:self-auto"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs shadow-lg transition-all active:scale-[0.98] self-start md:self-auto"
         >
           <Plus className="w-4 h-4" />
           <span>Log New Purchase</span>
@@ -144,74 +143,74 @@ export const FlipTracker: React.FC = () => {
       </div>
 
       {/* Stats Bento */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
-          <span className="text-[10px] uppercase font-bold text-slate-400 block">Total Sourced (Cost)</span>
-          <div className="text-xl font-extrabold text-white mt-1">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+        <div className="p-4 rounded-3xl bg-[#0e1320] border border-slate-800 shadow-md">
+          <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Total Sourced (Cost)</span>
+          <div className="text-2xl font-black text-white mt-1 font-mono">
             ${totalInvested.toFixed(2)}
           </div>
-          <span className="text-[10px] text-slate-400">{flips.length} items total</span>
+          <span className="text-[10px] text-slate-400 mt-0.5 block">{flips.length} items logged</span>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
-          <span className="text-[10px] uppercase font-bold text-slate-400 block">Total Revenue</span>
-          <div className="text-xl font-extrabold text-white mt-1">
+        <div className="p-4 rounded-3xl bg-[#0e1320] border border-slate-800 shadow-md">
+          <span className="text-[10px] uppercase font-bold text-slate-400 block tracking-wider">Total Revenue</span>
+          <div className="text-2xl font-black text-white mt-1 font-mono">
             ${totalRevenue.toFixed(2)}
           </div>
-          <span className="text-[10px] text-slate-400">{soldCount} items sold</span>
+          <span className="text-[10px] text-slate-400 mt-0.5 block">{soldCount} items sold</span>
         </div>
 
-        <div className="p-4 rounded-xl bg-emerald-950/40 border border-emerald-500/40">
-          <span className="text-[10px] uppercase font-bold text-emerald-400 block">Total Cash Profit</span>
+        <div className="p-4 rounded-3xl bg-emerald-950/30 border border-emerald-500/40 shadow-md">
+          <span className="text-[10px] uppercase font-bold text-emerald-400 block tracking-wider">Total Cash Profit</span>
           <div className="text-2xl font-black text-emerald-400 mt-1 font-mono">
             +${totalProfit.toFixed(2)}
           </div>
-          <span className="text-[10px] text-emerald-300/80">Pure pocket return</span>
+          <span className="text-[10px] text-emerald-300/80 mt-0.5 block">Pure pocket return</span>
         </div>
 
-        <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
-          <span className="text-[10px] uppercase font-bold text-amber-400 block">Portfolio ROI</span>
+        <div className="p-4 rounded-3xl bg-[#0e1320] border border-slate-800 shadow-md">
+          <span className="text-[10px] uppercase font-bold text-amber-400 block tracking-wider">Portfolio ROI</span>
           <div className="text-2xl font-black text-amber-400 mt-1 font-mono">
             +{roi.toFixed(1)}%
           </div>
-          <span className="text-[10px] text-slate-400">50%+ target exceeded</span>
+          <span className="text-[10px] text-slate-400 mt-0.5 block">50%+ target exceeded</span>
         </div>
       </div>
 
       {/* Add New Flip Form */}
       {showAddForm && (
-        <form onSubmit={handleAddFlip} className="p-5 rounded-2xl bg-slate-900 border border-slate-700 space-y-4 animate-in fade-in">
-          <h3 className="font-extrabold text-sm text-white flex items-center gap-2">
+        <form onSubmit={handleAddFlip} className="p-6 rounded-3xl bg-[#0e1320] border border-slate-700/80 space-y-4 shadow-2xl animate-in fade-in duration-300">
+          <h3 className="font-extrabold text-base text-white flex items-center gap-2 font-display">
             <Plus className="w-4 h-4 text-emerald-400" />
             <span>Record New Clearance Item Bought</span>
           </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-12 gap-3.5 text-xs">
             <div className="sm:col-span-6">
-              <label className="block text-slate-300 font-bold mb-1">Item Title / Model:</label>
+              <label className="block text-slate-300 font-bold mb-1.5">Item Title / Model:</label>
               <input
                 type="text"
                 required
                 value={newTitle}
                 onChange={e => setNewTitle(e.target.value)}
                 placeholder="e.g. DeWalt 20V Drill Kit or Ninja Air Fryer"
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500"
+                className="w-full px-3.5 py-2.5 rounded-2xl bg-[#07090e] border border-slate-800 text-white focus:outline-none focus:border-emerald-500 transition-colors"
               />
             </div>
 
             <div className="sm:col-span-6">
-              <label className="block text-slate-300 font-bold mb-1">Store Purchased From:</label>
+              <label className="block text-slate-300 font-bold mb-1.5">Store Purchased From:</label>
               <input
                 type="text"
                 value={newStore}
                 onChange={e => setNewStore(e.target.value)}
                 placeholder="e.g. Theisen's Waterloo or Home Depot Cedar Falls"
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white focus:outline-none focus:border-emerald-500"
+                className="w-full px-3.5 py-2.5 rounded-2xl bg-[#07090e] border border-slate-800 text-white focus:outline-none focus:border-emerald-500 transition-colors"
               />
             </div>
 
             <div className="sm:col-span-4">
-              <label className="block text-slate-300 font-bold mb-1">Buy Price ($):</label>
+              <label className="block text-slate-300 font-bold mb-1.5">Buy Price ($):</label>
               <input
                 type="number"
                 step="0.01"
@@ -219,12 +218,12 @@ export const FlipTracker: React.FC = () => {
                 value={newBuyPrice}
                 onChange={e => setNewBuyPrice(e.target.value)}
                 placeholder="59.00"
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-mono focus:outline-none focus:border-emerald-500"
+                className="w-full px-3.5 py-2.5 rounded-2xl bg-[#07090e] border border-slate-800 text-white font-mono focus:outline-none focus:border-emerald-500 transition-colors"
               />
             </div>
 
             <div className="sm:col-span-4">
-              <label className="block text-slate-300 font-bold mb-1">Target Resale Price ($):</label>
+              <label className="block text-slate-300 font-bold mb-1.5">Target Resale Price ($):</label>
               <input
                 type="number"
                 step="0.01"
@@ -232,16 +231,16 @@ export const FlipTracker: React.FC = () => {
                 value={newExpectedPrice}
                 onChange={e => setNewExpectedPrice(e.target.value)}
                 placeholder="129.00"
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-white font-mono focus:outline-none focus:border-emerald-500"
+                className="w-full px-3.5 py-2.5 rounded-2xl bg-[#07090e] border border-slate-800 text-white font-mono focus:outline-none focus:border-emerald-500 transition-colors"
               />
             </div>
 
             <div className="sm:col-span-4">
-              <label className="block text-slate-300 font-bold mb-1">Selling Channel:</label>
+              <label className="block text-slate-300 font-bold mb-1.5">Selling Channel:</label>
               <select
                 value={newPlatform}
                 onChange={e => setNewPlatform(e.target.value as any)}
-                className="w-full px-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-200 focus:outline-none focus:border-emerald-500"
+                className="w-full px-3.5 py-2.5 rounded-2xl bg-[#07090e] border border-slate-800 text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
               >
                 <option value="Facebook Marketplace">Facebook Marketplace (Cash)</option>
                 <option value="eBay">eBay (Shipped)</option>
@@ -251,17 +250,17 @@ export const FlipTracker: React.FC = () => {
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-2 pt-2">
+          <div className="flex items-center justify-end gap-2.5 pt-2">
             <button
               type="button"
               onClick={() => setShowAddForm(false)}
-              className="px-3.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold"
+              className="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold hover:text-white transition-colors"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-4 py-1.5 rounded-lg bg-emerald-500 text-slate-950 text-xs font-extrabold"
+              className="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-extrabold shadow-md transition-all active:scale-95"
             >
               Save Flip to Tracker
             </button>
@@ -270,10 +269,10 @@ export const FlipTracker: React.FC = () => {
       )}
 
       {/* Flips Table */}
-      <div className="rounded-2xl bg-slate-900 border border-slate-800 overflow-hidden">
-        <div className="px-5 py-4 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
-          <span className="font-extrabold text-sm text-white">Active Flip Inventory Log</span>
-          <span className="text-xs font-mono text-slate-400">{flips.length} Records</span>
+      <div className="rounded-3xl bg-[#0e1320] border border-slate-800 overflow-hidden shadow-xl">
+        <div className="px-6 py-4 bg-[#07090e] border-b border-slate-800 flex items-center justify-between">
+          <span className="font-extrabold text-sm text-white font-display">Active Flip Inventory Log</span>
+          <span className="text-xs font-mono text-slate-400 bg-slate-900 px-2.5 py-1 rounded-xl border border-slate-800">{flips.length} Records</span>
         </div>
 
         <div className="divide-y divide-slate-800/80">
@@ -282,19 +281,19 @@ export const FlipTracker: React.FC = () => {
             const margin = (profit / flip.buyPrice) * 100;
 
             return (
-              <div key={flip.id} className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+              <div key={flip.id} className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-xs hover:bg-[#07090e]/40 transition-colors">
                 <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold text-sm text-white">{flip.title}</span>
-                    <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="font-bold text-sm text-white font-display">{flip.title}</span>
+                    <span className={`px-2.5 py-0.5 rounded-lg text-[10px] font-bold ${
                       flip.status === 'Sold & Paid'
                         ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-                        : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                        : 'bg-amber-400/20 text-amber-300 border border-amber-400/30'
                     }`}>
                       {flip.status}
                     </span>
                   </div>
-                  <div className="text-slate-400 flex items-center gap-3">
+                  <div className="text-slate-400 flex items-center gap-3 text-xs">
                     <span>Store: <strong className="text-slate-300">{flip.storeName}</strong></span>
                     <span>•</span>
                     <span>Platform: <strong className="text-slate-300">{flip.platform}</strong></span>
@@ -313,7 +312,7 @@ export const FlipTracker: React.FC = () => {
                     <div className="text-emerald-400 font-extrabold text-sm font-mono">
                       +${profit.toFixed(2)}
                     </div>
-                    <div className="text-emerald-400/80 text-[10px] font-bold">
+                    <div className="text-emerald-400/80 text-[10px] font-bold font-mono">
                       +{margin.toFixed(0)}% ROI
                     </div>
                   </div>
@@ -322,7 +321,7 @@ export const FlipTracker: React.FC = () => {
                     {flip.status !== 'Sold & Paid' && (
                       <button
                         onClick={() => handleStatusChange(flip.id, 'Sold & Paid')}
-                        className="px-2.5 py-1 rounded bg-emerald-500/20 hover:bg-emerald-500 hover:text-slate-950 text-emerald-400 text-[11px] font-bold border border-emerald-500/40 transition-all"
+                        className="px-3 py-1.5 rounded-xl bg-emerald-500/20 hover:bg-emerald-500 hover:text-slate-950 text-emerald-400 text-xs font-bold border border-emerald-500/40 transition-all active:scale-95"
                         title="Mark as Sold & Collected"
                       >
                         Mark Sold
@@ -330,7 +329,7 @@ export const FlipTracker: React.FC = () => {
                     )}
                     <button
                       onClick={() => handleDelete(flip.id)}
-                      className="p-1.5 rounded text-slate-500 hover:text-red-400 transition-colors"
+                      className="p-2 rounded-xl text-slate-500 hover:text-red-400 hover:bg-red-500/10 transition-colors"
                       title="Delete Entry"
                     >
                       <Trash2 className="w-4 h-4" />
