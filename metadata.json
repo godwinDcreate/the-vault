@@ -1,0 +1,7 @@
+{
+  "name": "Iowa Retail Arbitrage & Hidden Clearance Finder",
+  "description": "50%+ profit deal finder and retail arbitrage scanner across 102+ stores in a 100-mile radius of Cedar Falls, Iowa with real-time SKU resale comps and clearance analysis.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
